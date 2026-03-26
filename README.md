@@ -1,4 +1,12 @@
+[IPYNB](https://drive.google.com/file/d/1qzlOE3KGdphBEvpFOUx4-tjpCZbzHpDR/view?usp=drive_link)
+[PDF](https://drive.google.com/file/d/11hp_9UA0k1k9Fk-BB8jYQVrgB7yOeJNE/view?usp=drive_link)
+
+
+
 # Hepsim_Evaluation
+
+
+
 This notebook works through quark/gluon jet classification using the Pythia 8 dataset (500k jets across 5 files). The data is stored as zero-padded constituent arrays, so the first thing was getting the masking right before computing anything.
 
 For each jet, three observables were computed from scratch: jet mass (from the full 4-momentum sum), jet width (pT-weighted angular spread), and pTD (how concentrated the transverse momentum is). All three show visible separation between quark and gluon jets, with gluons being broader and having lower pTD on average.
