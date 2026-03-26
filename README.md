@@ -1,2 +1,8 @@
 # Hepsim_Evaluation
-notebook works through quark/gluon jet classification using the Pythia 8 dataset (500k jets across 5 files). The data is stored as zero-padded constituent arrays, so the first thing was getting the masking right before computing anything.
+This notebook works through quark/gluon jet classification using the Pythia 8 dataset (500k jets across 5 files). The data is stored as zero-padded constituent arrays, so the first thing was getting the masking right before computing anything.
+
+For each jet, three observables were computed from scratch: jet mass (from the full 4-momentum sum), jet width (pT-weighted angular spread), and pTD (how concentrated the transverse momentum is). All three show visible separation between quark and gluon jets, with gluons being broader and having lower pTD on average.
+
+The trickier part was the Lorentz boost to the jet rest frame. The boost vector is β = p_J / E_J, and applying the full vector boost to each constituent brings the total 3-momentum to effectively zero (~1e-13 GeV), which confirms the implementation is correct. Visually, the gluon jet in the rest frame looks more spread out and isotropic compared to the quark jet, which has most of its constituents clustered near the origin with one or two outliers.
+
+For classification, four rest-frame features were used: multiplicity, jet mass, pTD, and momentum spread. Two classifiers were trained: Random Forest and a BDT. The BDT performs slightly better (AUC 0.857 vs 0.840), which is expected since boosting handles overlapping distributions better. The most discriminating feature turned out to be pTD in the rest frame, followed closely by multiplicity — both of which tie back directly to the color factor difference between quarks and gluons. Working in the rest frame helps for the geometry-sensitive features like pTD and spread, since it removes the lab-frame boost direction from the picture.
